@@ -1,4 +1,4 @@
 interface:
   display_name: "Academic Framework Figure"
-  short_description: "Editable top-conference method figures in draw.io"
-  default_prompt: "Use $academic-framework-figure to turn my method into an editable publication-quality draw.io figure, select the appropriate style, and validate PNG/PDF exports."
+  short_description: "Image 2 concepts to editable draw.io figures"
+  default_prompt: "Use $academic-framework-figure to generate an Image 2 concept for my method, reconstruct it as an editable publication-quality draw.io figure, and validate the PNG/PDF exports."

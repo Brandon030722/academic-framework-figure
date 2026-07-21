@@ -30,8 +30,19 @@ def main() -> int:
                 errors.append("description is missing or too short")
         if len(text) > 15000:
             errors.append("SKILL.md should route to references instead of embedding excessive detail")
+        for required in ("Image 2", "image_gen.imagegen", "image-2-workflow.md"):
+            if required not in text:
+                errors.append(f"SKILL.md is missing Image 2 contract token: {required}")
     if not (skill / "agents" / "openai.yaml").is_file():
         errors.append("missing agents/openai.yaml")
+    image_workflow = skill / "references" / "image-2-workflow.md"
+    if not image_workflow.is_file():
+        errors.append("missing references/image-2-workflow.md")
+    else:
+        workflow = image_workflow.read_text(encoding="utf-8")
+        for required in ("Trigger matrix", "Tool protocol", "Raster/vector boundary"):
+            if required not in workflow:
+                errors.append(f"Image 2 workflow is missing section: {required}")
     if errors:
         for error in errors:
             print(f"ERROR: {error}")

@@ -1,6 +1,16 @@
-# Academic Framework Figure v2.1
+# Academic Framework Figure v2.2
 
-Create editable, publication-quality academic method figures in draw.io, then validate and export them deterministically. Version 2.1 adds native compound academic glyphs, richer multimodal templates, generated original input imagery, and full-width showcase previews. The design system is informed by coded observations from 60 accepted papers across 15 conference-year groups; the repository contains metadata and original examples, never copied paper figures.
+Generate an Image 2 concept when visual exploration or original raster evidence is needed, reconstruct the result as an editable publication-quality draw.io method figure, then validate and export it deterministically. Version 2.2 makes the built-in Image 2 call an explicit Skill workflow rather than an implicit optional step. The design system is informed by coded observations from 60 accepted papers across 15 conference-year groups; the repository contains metadata and original examples, never copied paper figures.
+
+## Image 2 to editable draw.io
+
+Invoke the Skill with an explicit request such as:
+
+```text
+$academic-framework-figure Generate one Image 2 layout concept for my method, perform one targeted layout edit, then reconstruct the accepted concept as an editable draw.io figure.
+```
+
+The Skill uses the built-in Image 2 path for concept generation and missing RGB/depth/sensor/result imagery. Generated labels and arrows are never treated as final artwork: all semantic structure, typography, formulas, connectors, tensors, graphs, heatmaps, descriptors, and losses are rebuilt as native draw.io cells. Project-bound generated images are copied into the workspace, embedded as `data:` URIs, and delivered with prompt provenance.
 
 ## Editable showcase
 
@@ -67,7 +77,7 @@ mkdir -p ~/.codex/skills
 cp -R academic-framework-figure/plugins/academic-framework-figure/skills/academic-framework-figure ~/.codex/skills/
 ```
 
-The Skill is self-contained: scripts, references, 60-paper evidence metadata, icons, and three editable templates live under the same directory.
+The Skill is self-contained: Image 2 invocation guidance, scripts, references, 60-paper evidence metadata, icons, and three editable templates live under the same directory. Image 2 itself is a built-in Codex capability rather than a vendored runtime dependency.
 
 ## Generate from a spec
 
@@ -116,7 +126,7 @@ The renderer checks `DRAWIO_BIN`, the system `PATH`, and common macOS, Windows, 
 
 ```text
 .agents/plugins/marketplace.json       Codex marketplace
-plugins/academic-framework-figure/    Codex Plugin 2.1
+plugins/academic-framework-figure/    Codex Plugin 2.2
   .codex-plugin/plugin.json
   skills/academic-framework-figure/   Standalone Skill
 examples/                              Three original spec/draw.io/PNG/PDF sets
