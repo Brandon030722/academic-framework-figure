@@ -1,0 +1,46 @@
+{
+  "title": "Structured Pipeline Example",
+  "style": "structured-pipeline",
+  "canvas": {"width": 1800, "height": 900},
+  "font": "Times New Roman",
+  "groups": [
+    {"id": "g_local", "label": "Local Alignment — Training Only", "x": 650, "y": 55, "width": 800, "height": 340, "accent": "#6D4AA2", "dashed": true},
+    {"id": "g_global", "label": "Stable Global Descriptor", "x": 650, "y": 440, "width": 800, "height": 360, "accent": "#057E86", "dashed": true}
+  ],
+  "nodes": [
+    {"id": "mod_a", "kind": "input", "label": "Modality A", "x": 70, "y": 180, "width": 210, "height": 110, "accent": "#1756A9"},
+    {"id": "mod_b", "kind": "input", "label": "Modality B", "x": 70, "y": 555, "width": 210, "height": 110, "accent": "#F26B21"},
+    {"id": "backbone", "kind": "shared-module", "label": "Shared Backbone (θ)", "x": 360, "y": 330, "width": 220, "height": 190, "ports": [{"id": "a", "x": 0, "y": 0.25, "color": "#1756A9"}, {"id": "b", "x": 0, "y": 0.75, "color": "#F26B21"}, {"id": "local", "x": 1, "y": 0.28, "color": "#6D4AA2"}, {"id": "global", "x": 1, "y": 0.72, "color": "#057E86"}]},
+    {"id": "graph_a", "kind": "graph", "label": "Adaptive nodes A", "x": 720, "y": 140, "width": 190, "height": 120, "accent": "#1756A9"},
+    {"id": "graph_b", "kind": "graph", "label": "Adaptive nodes B", "x": 720, "y": 275, "width": 190, "height": 100, "accent": "#F26B21"},
+    {"id": "align", "kind": "heatmap", "label": "Soft correspondence", "x": 1010, "y": 165, "width": 230, "height": 170, "accent": "#6D4AA2"},
+    {"id": "local_loss", "kind": "loss", "label": "<i>L</i><sub>align</sub>", "x": 1300, "y": 205, "width": 110, "height": 80},
+    {"id": "pool", "kind": "shared-module", "label": "Shared Aggregator", "x": 720, "y": 555, "width": 210, "height": 130, "accent": "#057E86"},
+    {"id": "desc_a", "kind": "descriptor", "label": "Anchor descriptor", "x": 1015, "y": 500, "width": 230, "height": 90, "accent": "#1756A9"},
+    {"id": "desc_b", "kind": "descriptor", "label": "Positive descriptor", "x": 1015, "y": 660, "width": 230, "height": 90, "accent": "#F26B21"},
+    {"id": "negative", "kind": "descriptor", "label": "Hard negative", "x": 1015, "y": 770, "width": 230, "height": 70, "accent": "#D64545"},
+    {"id": "triplet", "kind": "loss", "label": "Triplet Loss", "x": 1300, "y": 590, "width": 125, "height": 90},
+    {"id": "merge", "kind": "merge", "label": "+", "x": 1510, "y": 410, "width": 55, "height": 55},
+    {"id": "objective", "kind": "output", "label": "<i>L</i> = <i>L</i><sub>triplet</sub> + λ<i>L</i><sub>align</sub>", "x": 1590, "y": 385, "width": 190, "height": 105, "accent": "#D64545"}
+  ],
+  "edges": [
+    {"id": "e1", "source": "mod_a", "target": "backbone", "targetPort": "a", "color": "#1756A9"},
+    {"id": "e2", "source": "mod_b", "target": "backbone", "targetPort": "b", "color": "#F26B21"},
+    {"id": "e3", "source": "backbone", "sourcePort": "local", "target": "graph_a", "trainingOnly": true},
+    {"id": "e4", "source": "backbone", "sourcePort": "local", "target": "graph_b", "trainingOnly": true},
+    {"id": "e5", "source": "graph_a", "target": "align", "trainingOnly": true},
+    {"id": "e6", "source": "graph_b", "target": "align", "trainingOnly": true},
+    {"id": "e7", "source": "align", "target": "local_loss", "trainingOnly": true},
+    {"id": "e8", "source": "backbone", "sourcePort": "global", "target": "pool", "color": "#057E86"},
+    {"id": "e9", "source": "pool", "target": "desc_a", "color": "#1756A9"},
+    {"id": "e10", "source": "pool", "target": "desc_b", "color": "#F26B21"},
+    {"id": "e11", "source": "desc_a", "target": "triplet", "color": "#1756A9"},
+    {"id": "e12", "source": "desc_b", "target": "triplet", "color": "#F26B21"},
+    {"id": "e13", "source": "negative", "target": "triplet", "color": "#D64545", "dashed": true},
+    {"id": "e14", "source": "local_loss", "target": "merge", "trainingOnly": true},
+    {"id": "e15", "source": "triplet", "target": "merge", "color": "#D64545"},
+    {"id": "e16", "source": "merge", "target": "objective", "color": "#D64545"}
+  ],
+  "constraints": {"singletons": [{"label": "Shared Backbone (θ)", "count": 1}, {"label": "Shared Aggregator", "count": 1}], "forbiddenLabels": ["Hard-negative mining"]},
+  "outputs": ["drawio", "png", "pdf"]
+}

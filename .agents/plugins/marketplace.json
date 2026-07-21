@@ -1,0 +1,20 @@
+{
+  "name": "academic-framework-figure",
+  "interface": {
+    "displayName": "Academic Figure Tools"
+  },
+  "plugins": [
+    {
+      "name": "academic-framework-figure",
+      "source": {
+        "source": "local",
+        "path": "./plugins/academic-framework-figure"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

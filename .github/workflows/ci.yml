@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Validate corpus
+        run: python research/validate_corpus.py
+      - name: Validate standalone skill
+        run: python plugins/academic-framework-figure/skills/academic-framework-figure/scripts/validate_skill.py plugins/academic-framework-figure/skills/academic-framework-figure
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
+      - name: Validate plugin and marketplace
+        run: python scripts/validate_plugin.py plugins/academic-framework-figure --marketplace .agents/plugins/marketplace.json
+      - name: Syntax-check JavaScript
+        shell: bash
+        run: |
+          node --check plugins/academic-framework-figure/skills/academic-framework-figure/scripts/generate_figure.js
+          node --check plugins/academic-framework-figure/skills/academic-framework-figure/scripts/drawio_helpers.js

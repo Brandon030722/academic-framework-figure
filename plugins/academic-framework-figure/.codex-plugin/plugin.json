@@ -1,0 +1,35 @@
+{
+  "name": "academic-framework-figure",
+  "version": "2.0.0",
+  "description": "Design, generate, and validate editable publication-quality academic method figures in draw.io.",
+  "author": {
+    "name": "Brandon030722",
+    "url": "https://github.com/Brandon030722"
+  },
+  "homepage": "https://github.com/Brandon030722/academic-framework-figure",
+  "repository": "https://github.com/Brandon030722/academic-framework-figure",
+  "license": "MIT",
+  "keywords": ["academic figures", "draw.io", "research diagrams", "computer vision"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Academic Framework Figure",
+    "shortDescription": "Editable top-conference method figures",
+    "longDescription": "Routes a paper method to one of three evidence-derived styles, generates a native draw.io diagram, and checks XML, embedded images, fonts, exports, and paper-scale readability.",
+    "developerName": "Brandon030722",
+    "category": "Productivity",
+    "capabilities": ["draw.io generation", "academic figure design", "PNG/PDF QA"],
+    "websiteURL": "https://github.com/Brandon030722/academic-framework-figure",
+    "defaultPrompt": [
+      "Turn my method into an editable draw.io figure.",
+      "Rebuild this framework figure in a top-conference style.",
+      "Audit my academic figure for layout and editability."
+    ],
+    "brandColor": "#1756A9",
+    "composerIcon": "./assets/icon.png",
+    "screenshots": [
+      "./assets/minimal-modular.png",
+      "./assets/visual-semantic.png",
+      "./assets/structured-pipeline.png"
+    ]
+  }
+}

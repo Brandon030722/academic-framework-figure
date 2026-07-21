@@ -1,0 +1,29 @@
+{
+  "title": "Visual Semantic Example",
+  "style": "visual-semantic",
+  "canvas": {"width": 1600, "height": 800},
+  "font": "Times New Roman",
+  "groups": [
+    {"id": "g_modal", "label": "Multimodal Representation", "x": 55, "y": 80, "width": 1010, "height": 630, "accent": "#16858E", "dashed": true},
+    {"id": "g_task", "label": "Semantic Prediction", "x": 1100, "y": 80, "width": 440, "height": 630, "accent": "#1456A0", "dashed": true}
+  ],
+  "nodes": [
+    {"id": "rgb", "kind": "image", "label": "", "x": 105, "y": 180, "width": 210, "height": 150, "accent": "#1456A0", "imageData": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAACgCAIAAAC9uXYyAAAEkUlEQVR4nO3dQY4TSRBA0WrUh/Caa7HoLdvmBHkABGfwuZBYW+IAbFk0Egh1U3Y5MzLi53+r0cxoypn5CcruGvzw7cfPTaJ4N/sFSD0ZtFAMWigGLRSDFopBC8WghWLQQjFooRi0UAxaKAYtFIMWikELxaCFYtBCMWihGLRQDFooj7NfgCo5ff/01j+6vP+yJfDg/ySrezrOVrZBq1vKGbI2aHVOeW7WvinUqJo7/neuZ9AaW2Fw0wat4f1FNm3QiigvrGmDVlBzMU0btOJqC7iKQQvFoLVFvmkbfS2DFopBr+4U/rOPoVc0aKEYtFAMemmn8PuN0dc1aKEYtFAMWigGLRSDFopBC8WghWLQQjHopV0m/WED465r0EIxaKEY9Oou4XcdQ69o0EIxaG2RQ3r0tQxaKAatuCEdcBWDVlBtMb9mDFoRzYXdphu0hpcX+abToDW2v+DPuQ1aAyuM/6mNX0mh//E7VgR08luwFKadn9vT15hrnfyeQg3Vzs+//yKq6eS8hybU/OfvPK2etZ9ywBNfjROa2W5bdVQ7oZmTuK06qp3Q9dwUa1tsVDuhi7l19LbFRrVBr/FB9XmVrA26knu6bGs07T10Gb2KbOi7aid0DR3na0OPaid0AYMSbMRR7YReVyOOaid0dgHZNdCoBk5o0uCJWUsD7RhtQpMep4zvrNXfNE7QsGcpZ03NVnnTOLccrx4/6XfSMK34jxUJE3r/0bNqUydDUq3apkGCvvLsCx1Phpor7lv5oG9+7qzC2aSqudC+lQ/62MEnP5uENVfZutpvCg8ffOZikmtFtq7ehL5/Z3MOmyrFtJS7VzLonk+cJTuVKjXn3L2SQY848iQHU6vmbLtX8h561POTCUrK8BpIrzz7hMY/a5Yzi7qjOvWExj9rBqh5S7aKvBM6eJvix0yqDjCjOumEnvDkZPCvH1zNW45FpZvQczclZsZkOHjqqM41oaefdPWHJ5OYuIeJJnSqksbNmFTL5I3qLBM62zGDP/mOFL/e+RM68xn3HTCZV4oZ1ZMndPIz9s8rKnfQM4NOXnOhF1lCC3nDPeeWo1wld/6OWW69dW8/JgRd93SPnUTd9VbMOvqWo/TpHnjxpdc71KCdCZ3QjNO9frQw1ltrVAdNaNJP4DALQe5nxIRGFrA7V5Crzj+qh09o6rnufO8ldNVDddm0sRMaf66vDhX8qjOP6lFBL3Wofx/AUgtP2PSQW47VDnW19Wb+FKF/0Gue7suq11z7OAf2s+cth8ep6Xcg3Sa0NWuc6+vqM6GtWUlGdYcJbc0KsxvbXRPalJVtVB+f0Nasid7K7+CEtmblHNVHJrQ1K49/arxtQpuyko/qGya0NSuzlz6vndDWrBIed/8NU1YhO7cc1ixO0NYsTtDWLMg9tCmLM6GtWZygrVmcoK1ZkHtoUxbGw4fPH2e/Bgn3HStSFwYtFIMWikELxaCFYtBCMWihGLRQDFooBi0UgxaKQQvFoIVi0EIxaKEYtFAMWigGLRSDFopBC8WghWLQQjFooRi0UAxaKAYtFIMWikELxaC1kfwCkWDnWsZvxDIAAAAASUVORK5CYII="},
+    {"id": "rgb_label", "kind": "note", "label": "RGB frames", "x": 105, "y": 335, "width": 210, "height": 40, "accent": "#1456A0"},
+    {"id": "depth", "kind": "image", "label": "", "x": 105, "y": 440, "width": 210, "height": 150, "accent": "#F07A24", "imageData": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAACgCAIAAAC9uXYyAAACC0lEQVR4nO3SwY3CQBAAwR1SuBSIivwDQcBZ8ADzgLtHq0p+WMxa1uCe489prTWzXY/3s7bR7E63Ay+nt2dnd/rwlufT+4EX098zu9PrcP5h38sPf7/vbd0P9513/8ZX9n379b+y7xwuc6gQNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhWyRkvBQN8gsl7XwAAAABJRU5ErkJggg=="},
+    {"id": "depth_label", "kind": "note", "label": "Depth frames", "x": 105, "y": 595, "width": 210, "height": 40, "accent": "#F07A24"},
+    {"id": "encoder", "kind": "shared-module", "label": "Shared Multimodal Encoder (θ)", "x": 415, "y": 320, "width": 250, "height": 170, "ports": [{"id": "rgb", "x": 0, "y": 0.32, "color": "#1456A0"}, {"id": "depth", "x": 0, "y": 0.7, "color": "#F07A24"}, {"id": "out", "x": 1, "y": 0.5, "color": "#16858E"}]},
+    {"id": "features", "kind": "tensor", "label": "Aligned feature volume", "x": 750, "y": 325, "width": 200, "height": 160, "accent": "#16858E"},
+    {"id": "head", "kind": "module", "label": "Semantic Head", "x": 1170, "y": 250, "width": 300, "height": 130},
+    {"id": "mask", "kind": "heatmap", "label": "Spatial mask", "x": 1185, "y": 465, "width": 270, "height": 140, "accent": "#6D4AA2"}
+  ],
+  "edges": [
+    {"id": "e1", "source": "rgb", "target": "encoder", "targetPort": "rgb", "color": "#1456A0"},
+    {"id": "e2", "source": "depth", "target": "encoder", "targetPort": "depth", "color": "#F07A24"},
+    {"id": "e3", "source": "encoder", "sourcePort": "out", "target": "features", "color": "#16858E"},
+    {"id": "e4", "source": "features", "target": "head"},
+    {"id": "e5", "source": "head", "target": "mask", "color": "#6D4AA2"}
+  ],
+  "constraints": {"singletons": [{"label": "Shared Multimodal Encoder (θ)", "count": 1}], "forbiddenLabels": []},
+  "outputs": ["drawio", "png", "pdf"]
+}

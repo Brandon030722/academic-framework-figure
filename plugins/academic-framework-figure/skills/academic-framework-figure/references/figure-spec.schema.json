@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Brandon030722/academic-framework-figure/figure-spec.schema.json",
+  "title": "Academic Framework Figure Spec",
+  "type": "object",
+  "required": ["title", "style", "canvas", "font", "nodes", "edges"],
+  "properties": {
+    "title": {"type": "string", "minLength": 1},
+    "style": {"enum": ["minimal-modular", "visual-semantic", "structured-pipeline"]},
+    "font": {"type": "string", "minLength": 1},
+    "canvas": {
+      "type": "object",
+      "required": ["width", "height"],
+      "properties": {"width": {"type": "number", "exclusiveMinimum": 0}, "height": {"type": "number", "exclusiveMinimum": 0}}
+    },
+    "groups": {"type": "array", "items": {"$ref": "#/$defs/box"}},
+    "nodes": {"type": "array", "items": {"$ref": "#/$defs/node"}},
+    "edges": {"type": "array", "items": {"$ref": "#/$defs/edge"}},
+    "constraints": {"type": "object"},
+    "outputs": {"type": "array", "items": {"enum": ["drawio", "png", "pdf"]}}
+  },
+  "$defs": {
+    "box": {
+      "type": "object",
+      "required": ["id", "label", "x", "y", "width", "height"],
+      "properties": {"id": {"type": "string"}, "label": {"type": "string"}, "x": {"type": "number"}, "y": {"type": "number"}, "width": {"type": "number", "exclusiveMinimum": 0}, "height": {"type": "number", "exclusiveMinimum": 0}}
+    },
+    "node": {
+      "allOf": [{"$ref": "#/$defs/box"}],
+      "properties": {"kind": {"enum": ["module", "shared-module", "input", "image", "tensor", "graph", "heatmap", "descriptor", "loss", "note", "merge", "output"]}, "imageData": {"type": "string"}, "ports": {"type": "array"}}
+    },
+    "edge": {
+      "type": "object",
+      "required": ["id", "source", "target"],
+      "properties": {"id": {"type": "string"}, "source": {"type": "string"}, "target": {"type": "string"}, "sourcePort": {"type": "string"}, "targetPort": {"type": "string"}, "label": {"type": "string"}, "dashed": {"type": "boolean"}, "trainingOnly": {"type": "boolean"}}
+    }
+  }
+}

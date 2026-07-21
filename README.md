@@ -1,66 +1,112 @@
-# Academic Framework Figure
+# Academic Framework Figure v2
 
-A reusable Codex skill for designing, rebuilding, and validating publication-quality academic method/framework figures as editable draw.io diagrams.
+Create editable, publication-quality academic method figures in draw.io, then validate and export them deterministically. Version 2 is informed by coded observations from 60 accepted papers across 15 conference-year groups; the repository contains metadata and original examples, never copied paper figures.
 
-It supports workflows that combine real input images with editable vector modules, tensors, graph nodes, heatmaps, descriptors, loss functions, shared-weight components, PNG previews, and PDF exports.
+## Three styles
 
-## Highlights
+| Style | Best for | Original preview |
+|---|---|---|
+| `minimal-modular` | One main path, few modules, large whitespace | ![Minimal modular](plugins/academic-framework-figure/assets/minimal-modular.png) |
+| `visual-semantic` | Real inputs, multimodal lanes, tensors, masks, semantic examples | ![Visual semantic](plugins/academic-framework-figure/assets/visual-semantic.png) |
+| `structured-pipeline` | Multiple branches/losses, stage panels, training/inference separation | ![Structured pipeline](plugins/academic-framework-figure/assets/structured-pipeline.png) |
 
-- Image-generation concept pass followed by deterministic draw.io reconstruction
-- Native editable `mxCell` shapes and orthogonal connectors
-- Correct visual treatment of shared-parameter modules
-- Times New Roman and mathematical-label guidance
-- Embedded-image and duplicate-ID validation
-- PNG/PDF rendering and paper-scale visual QA
-- Reusable vector icon assets for academic diagrams
+Automatic routing selects `structured-pipeline` for complex branching or train/test separation, `visual-semantic` when images or modalities dominate, and `minimal-modular` otherwise. An explicit user choice always wins.
 
-## Install for one user
+The same routing rule is available from the command line:
+
+```bash
+SKILL=plugins/academic-framework-figure/skills/academic-framework-figure
+python3 "$SKILL/scripts/route_style.py" \
+  --branches 2 --losses 1 --real-image-ratio 0.55 --modalities 2
+```
+
+Use `--train-test-split` when the figure separates training and inference. The command prints exactly one of the three style names.
+
+## Install as a Codex Plugin
 
 ```bash
 git clone https://github.com/Brandon030722/academic-framework-figure.git
-mkdir -p ~/.agents/skills
-cp -R academic-framework-figure/skills/academic-framework-figure ~/.agents/skills/
+cd academic-framework-figure
+codex plugin marketplace add "$PWD"
+codex plugin add academic-framework-figure@academic-framework-figure
 ```
 
-Restart Codex if the skill does not appear immediately. Invoke it explicitly with:
+Start a new Codex task, then invoke:
 
 ```text
 $academic-framework-figure
 ```
 
-## Install for one repository
-
-Copy the skill into the repository so the whole team receives it:
+## Install only the Skill
 
 ```bash
-mkdir -p /path/to/project/.agents/skills
-cp -R skills/academic-framework-figure /path/to/project/.agents/skills/
+git clone https://github.com/Brandon030722/academic-framework-figure.git
+mkdir -p ~/.codex/skills
+cp -R academic-framework-figure/plugins/academic-framework-figure/skills/academic-framework-figure ~/.codex/skills/
 ```
 
-## Validate
+The Skill is self-contained: scripts, references, 60-paper evidence metadata, icons, and three editable templates live under the same directory.
+
+## Generate from a spec
 
 ```bash
-python "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_validate.py" \
-  skills/academic-framework-figure
+SKILL=plugins/academic-framework-figure/skills/academic-framework-figure
+node "$SKILL/scripts/generate_figure.js" \
+  --spec examples/visual-semantic/spec.json \
+  --out build/framework.drawio
 ```
 
-To validate a generated draw.io file:
+`figure-spec.json` describes the canvas, style, font, groups, nodes, ports, embedded images, orthogonal edges, singleton shared modules, forbidden labels, and expected outputs. See `references/figure-spec.md` and `figure-spec.schema.json` inside the Skill.
+
+## Validate and render
+
+Public validation requires only Python 3 and Node.js; it does not require PyYAML.
 
 ```bash
-node skills/academic-framework-figure/scripts/validate_drawio.js \
-  figure.drawio \
-  --require-font "Times New Roman"
+SKILL=plugins/academic-framework-figure/skills/academic-framework-figure
+
+python3 "$SKILL/scripts/validate_skill.py" "$SKILL"
+python3 research/validate_corpus.py
+python3 scripts/validate_plugin.py plugins/academic-framework-figure \
+  --marketplace .agents/plugins/marketplace.json
+python3 -m unittest discover -s tests -v
 ```
 
-To export PNG and PDF with the draw.io desktop CLI installed:
+Validate an editable figure:
 
 ```bash
-skills/academic-framework-figure/scripts/render_drawio.sh figure.drawio output
+python3 "$SKILL/scripts/validate_drawio.py" build/framework.drawio \
+  --require-font "Times New Roman" \
+  --forbid-external-images \
+  --expect "Shared Encoder (θ)=1"
 ```
 
-## Public asset policy
+Export and run the full QA pass with the draw.io desktop app installed:
 
-This repository includes only generic vector assets. It intentionally excludes paper-specific screenshots and source images. Users should provide images they have permission to use in their own diagrams.
+```bash
+python3 "$SKILL/scripts/qa_figure.py" build/framework.drawio \
+  --out-dir build/framework-exports
+```
+
+The renderer checks `DRAWIO_BIN`, the system `PATH`, and common macOS, Windows, and Linux locations. It creates a PNG, a single-page PDF, and a 25% thumbnail.
+
+## Repository layout
+
+```text
+.agents/plugins/marketplace.json       Codex marketplace
+plugins/academic-framework-figure/    Codex Plugin 2.0.0
+  .codex-plugin/plugin.json
+  skills/academic-framework-figure/   Standalone Skill
+examples/                              Three original spec/draw.io/PNG/PDF sets
+research/papers.json                  60-paper coded evidence corpus
+tests/                                Generator and XML failure-mode tests
+```
+
+## Research and copyright policy
+
+Each public corpus record contains an official acceptance/proceedings link, a paper/PDF link, the primary figure/page, layout measurements, train/inference and shared-parameter encodings, and an inspection checklist. The repository does not redistribute paper screenshots, figures, conference logos, or user project assets.
+
+Paper-specific material such as CRAFT inputs should stay in the user's local project. Only assets with redistribution permission may be embedded in a public template.
 
 ## License
 
