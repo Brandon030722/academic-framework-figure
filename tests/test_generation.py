@@ -1,4 +1,5 @@
 import hashlib
+import json
 import subprocess
 import tempfile
 import unittest
@@ -26,6 +27,26 @@ class GenerationTests(unittest.TestCase):
         text = (ROOT / "examples/visual-semantic/visual-semantic.drawio").read_text(encoding="utf-8")
         self.assertIn("data:image/png%3Bbase64,", text)
         self.assertNotIn("https://", text)
+        self.assertIn("volume__cell_0_0", text)
+        self.assertIn("graph__g_0", text)
+        self.assertIn("mask__hm_0_0", text)
+
+    def test_remote_image_path_is_rejected(self):
+        spec = {
+            "title": "Remote image rejection",
+            "style": "visual-semantic",
+            "canvas": {"width": 400, "height": 240},
+            "font": "Times New Roman",
+            "nodes": [{"id": "bad", "kind": "sequence", "label": "Bad", "x": 20, "y": 20, "width": 200, "height": 150, "imagePath": "https://example.com/image.png"}],
+            "edges": [],
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            spec_path = Path(tmp) / "spec.json"
+            spec_path.write_text(json.dumps(spec), encoding="utf-8")
+            out = Path(tmp) / "out.drawio"
+            result = subprocess.run(["node", str(GEN), "--spec", str(spec_path), "--out", str(out)], text=True, capture_output=True)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("cannot use a remote imagePath", result.stderr)
 
 
 if __name__ == "__main__":

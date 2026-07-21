@@ -35,26 +35,27 @@ An explicit user choice overrides routing. Apply the selected profile's tokens c
 
 1. Translate the method into a compact `figure-spec.json`. Read [figure-spec.md](references/figure-spec.md).
 2. Consolidate semantically shared modules into one node with multiple named ports. Encode parameter sharing in the label, for example `Shared Encoder (theta)`.
-3. Create a bitmap concept only when visual exploration is useful. Treat it as a layout reference, never as the editable deliverable.
-4. Generate an uncompressed draw.io file:
+3. Match visual evidence to the method: use embedded or locally sourced sequence imagery where inputs matter, and native compound tensor, graph, heatmap, descriptor, sensor, and feature-plane glyphs for intermediate representations. Do not present a row of generic labeled rectangles as a publication-quality example.
+4. Create a bitmap concept only when visual exploration is useful. Treat it as a layout reference, never as the editable deliverable.
+5. Generate an uncompressed draw.io file:
 
    ```bash
    node scripts/generate_figure.js --spec figure-spec.json --out framework.drawio
    ```
 
-5. Validate structure and editability:
+6. Validate structure and editability:
 
    ```bash
    python3 scripts/validate_drawio.py framework.drawio --forbid-external-images
    ```
 
-6. Run export QA. Set `DRAWIO_BIN` when draw.io is installed outside a common location:
+7. Run export QA. Set `DRAWIO_BIN` when draw.io is installed outside a common location:
 
    ```bash
    python3 scripts/qa_figure.py framework.drawio --out-dir build/framework
    ```
 
-7. Inspect both the full PNG and the 25% thumbnail. Fix crossings, text collisions, uneven gutters, weak hierarchy, clipping, and unreadable labels. Repeat until clean.
+8. Inspect both the full PNG and the 25% thumbnail. Fix crossings, text collisions, uneven gutters, weak hierarchy, clipping, and unreadable labels. Repeat until clean. For README or marketplace showcases, display each wide figure at full content width instead of compressing several figures into table columns.
 
 Read [drawio-editability-checklist.md](references/drawio-editability-checklist.md) before delivery.
 

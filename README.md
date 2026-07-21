@@ -1,14 +1,36 @@
-# Academic Framework Figure v2
+# Academic Framework Figure v2.1
 
-Create editable, publication-quality academic method figures in draw.io, then validate and export them deterministically. Version 2 is informed by coded observations from 60 accepted papers across 15 conference-year groups; the repository contains metadata and original examples, never copied paper figures.
+Create editable, publication-quality academic method figures in draw.io, then validate and export them deterministically. Version 2.1 adds native compound academic glyphs, richer multimodal templates, generated original input imagery, and full-width showcase previews. The design system is informed by coded observations from 60 accepted papers across 15 conference-year groups; the repository contains metadata and original examples, never copied paper figures.
 
-## Three styles
+## Editable showcase
 
-| Style | Best for | Original preview |
-|---|---|---|
-| `minimal-modular` | One main path, few modules, large whitespace | ![Minimal modular](plugins/academic-framework-figure/assets/minimal-modular.png) |
-| `visual-semantic` | Real inputs, multimodal lanes, tensors, masks, semantic examples | ![Visual semantic](plugins/academic-framework-figure/assets/visual-semantic.png) |
-| `structured-pipeline` | Multiple branches/losses, stage panels, training/inference separation | ![Structured pipeline](plugins/academic-framework-figure/assets/structured-pipeline.png) |
+Every preview below is exported from the linked native draw.io file. Text, connectors, panels, ports, feature planes, tensor cells, graph nodes, heatmap cells, descriptor beads, icons, and losses remain individually editable.
+
+### `structured-pipeline`
+
+For multiple branches and losses, stage panels, shared modules, or training/inference separation.
+
+<img src="plugins/academic-framework-figure/assets/structured-pipeline.png" alt="Structured pipeline academic framework figure" width="100%">
+
+[Editable draw.io](examples/structured-pipeline/structured-pipeline.drawio) · [source spec](examples/structured-pipeline/spec.json) · [PDF](examples/structured-pipeline/structured-pipeline.pdf)
+
+### `visual-semantic`
+
+For real inputs, multimodal lanes, feature tensors, semantic examples, masks, and uncertainty.
+
+<img src="plugins/academic-framework-figure/assets/visual-semantic.png" alt="Visual semantic academic framework figure" width="100%">
+
+[Editable draw.io](examples/visual-semantic/visual-semantic.drawio) · [source spec](examples/visual-semantic/spec.json) · [PDF](examples/visual-semantic/visual-semantic.pdf)
+
+### `minimal-modular`
+
+For one dominant argument with a short auxiliary branch and generous whitespace.
+
+<img src="plugins/academic-framework-figure/assets/minimal-modular.png" alt="Minimal modular academic framework figure" width="100%">
+
+[Editable draw.io](examples/minimal-modular/minimal-modular.drawio) · [source spec](examples/minimal-modular/spec.json) · [PDF](examples/minimal-modular/minimal-modular.pdf)
+
+The RGB and depth strips are original AI-generated assets created for these public examples. They are not taken from a paper, benchmark screenshot, or user project.
 
 Automatic routing selects `structured-pipeline` for complex branching or train/test separation, `visual-semantic` when images or modalities dominate, and `minimal-modular` otherwise. An explicit user choice always wins.
 
@@ -94,7 +116,7 @@ The renderer checks `DRAWIO_BIN`, the system `PATH`, and common macOS, Windows, 
 
 ```text
 .agents/plugins/marketplace.json       Codex marketplace
-plugins/academic-framework-figure/    Codex Plugin 2.0.0
+plugins/academic-framework-figure/    Codex Plugin 2.1
   .codex-plugin/plugin.json
   skills/academic-framework-figure/   Standalone Skill
 examples/                              Three original spec/draw.io/PNG/PDF sets

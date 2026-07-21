@@ -1,22 +1,30 @@
 {
-  "title": "Minimal Modular Example",
+  "title": "Minimal Modular — Prototype-Guided Recognition",
   "style": "minimal-modular",
-  "canvas": {"width": 1600, "height": 800},
+  "canvas": {"width": 1800, "height": 760, "background": "#FFFFFF"},
   "font": "Times New Roman",
   "groups": [],
   "nodes": [
-    {"id": "input", "kind": "input", "label": "Input sequence", "x": 90, "y": 330, "width": 210, "height": 110},
-    {"id": "encoder", "kind": "shared-module", "label": "Shared Encoder (θ)", "x": 390, "y": 300, "width": 240, "height": 170, "ports": [{"id": "in", "x": 0, "y": 0.5}, {"id": "out", "x": 1, "y": 0.5}]},
-    {"id": "latent", "kind": "tensor", "label": "Latent tokens", "x": 735, "y": 320, "width": 180, "height": 130},
-    {"id": "reasoner", "kind": "module", "label": "Context Reasoner", "x": 1015, "y": 315, "width": 220, "height": 140},
-    {"id": "output", "kind": "output", "label": "Prediction", "x": 1335, "y": 330, "width": 180, "height": 110}
+    {"id": "camera", "kind": "icon", "motif": "camera", "label": "Camera sequence", "x": 12, "y": 270, "width": 74, "height": 92, "accent": "#173B67"},
+    {"id": "input", "kind": "sequence", "label": "Visual Evidence Sequence", "x": 88, "y": 225, "width": 340, "height": 205, "imagePath": "../../generated/rgb-sequence.png", "indices": ["1", "2", "T"], "accent": "#173B67"},
+    {"id": "encoder", "kind": "shared-module", "motif": "planes", "label": "Shared Visual Encoder (θ)", "x": 486, "y": 235, "width": 205, "height": 190, "accent": "#173B67", "items": {"planes": 5, "caption": "single parameter set"}, "ports": [{"id": "in", "x": 0, "y": 0.5}, {"id": "out", "x": 1, "y": 0.5}]},
+    {"id": "tokens", "kind": "tensor", "label": "Multi-scale tokens", "x": 748, "y": 235, "width": 155, "height": 175, "accent": "#4F86C6", "items": {"rows": 4, "cols": 4}},
+    {"id": "reasoner", "kind": "graph", "label": "Prototype Interaction", "x": 962, "y": 218, "width": 205, "height": 205, "accent": "#2E7D78", "nodeFill": "#8FC7C1"},
+    {"id": "attention", "kind": "heatmap", "label": "Cross-attention", "x": 1225, "y": 225, "width": 205, "height": 195, "accent": "#4F86C6", "colors": ["#F7FAFD", "#DDEAF8", "#92B9E4", "#346FAE"]},
+    {"id": "code", "kind": "descriptor", "label": "Semantic code", "x": 1485, "y": 265, "width": 155, "height": 112, "accent": "#173B67", "items": {"count": 5}},
+    {"id": "output", "kind": "output", "label": "Prediction<br><i>y</i>̂", "x": 1683, "y": 266, "width": 105, "height": 108, "accent": "#173B67"},
+    {"id": "prior", "kind": "descriptor", "label": "Learned prototypes", "x": 975, "y": 500, "width": 200, "height": 120, "accent": "#8C5AA8", "beadFill": "#EADFF1", "fontSize": 18, "items": {"count": 4}},
+    {"id": "prior_note", "kind": "note", "label": "compact training prior", "x": 980, "y": 625, "width": 190, "height": 30, "fontSize": 14, "fontColor": "#6B4B78"}
   ],
   "edges": [
-    {"id": "e1", "source": "input", "target": "encoder", "targetPort": "in"},
-    {"id": "e2", "source": "encoder", "sourcePort": "out", "target": "latent"},
-    {"id": "e3", "source": "latent", "target": "reasoner"},
-    {"id": "e4", "source": "reasoner", "target": "output"}
+    {"id": "e1", "source": "input", "target": "encoder", "targetPort": "in", "color": "#173B67"},
+    {"id": "e2", "source": "encoder", "sourcePort": "out", "target": "tokens", "color": "#173B67"},
+    {"id": "e3", "source": "tokens", "target": "reasoner", "color": "#2E7D78"},
+    {"id": "e4", "source": "reasoner", "target": "attention", "color": "#2E7D78"},
+    {"id": "e5", "source": "attention", "target": "code", "color": "#4F86C6"},
+    {"id": "e6", "source": "code", "target": "output", "color": "#173B67"},
+    {"id": "e7", "source": "prior", "target": "reasoner", "color": "#8C5AA8", "dashed": true, "points": [{"x": 1075, "y": 470}]}
   ],
-  "constraints": {"singletons": [{"label": "Shared Encoder (θ)", "count": 1}], "forbiddenLabels": []},
+  "constraints": {"singletons": [{"label": "Shared Visual Encoder (θ)", "count": 1}], "forbiddenLabels": []},
   "outputs": ["drawio", "png", "pdf"]
 }

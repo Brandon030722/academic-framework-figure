@@ -7,6 +7,15 @@ import re
 import sys
 from pathlib import Path
 
+SEMVER_RE = re.compile(
+    r"^(0|[1-9]\d*)\."
+    r"(0|[1-9]\d*)\."
+    r"(0|[1-9]\d*)"
+    r"(?:-(?:0|[1-9]\d*|\d*[A-Za-z-][0-9A-Za-z-]*)(?:\."
+    r"(?:0|[1-9]\d*|\d*[A-Za-z-][0-9A-Za-z-]*))*)?"
+    r"(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$"
+)
+
 
 def main() -> int:
     parser = argparse.ArgumentParser()
@@ -23,7 +32,7 @@ def main() -> int:
     for key in ("name", "version", "description", "author", "interface"):
         if not manifest.get(key):
             errors.append(f"plugin manifest missing {key}")
-    if manifest.get("version") and not re.fullmatch(r"\d+\.\d+\.\d+", manifest["version"]):
+    if manifest.get("version") and not SEMVER_RE.fullmatch(manifest["version"]):
         errors.append("version must be strict semver")
     if manifest.get("author") and not manifest["author"].get("name"):
         errors.append("author.name is required")

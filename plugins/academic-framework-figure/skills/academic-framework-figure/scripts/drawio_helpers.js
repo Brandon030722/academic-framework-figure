@@ -25,8 +25,15 @@ function vertex({ id, value = "", parent = "1", style: cellStyle, x, y, width, h
   return `<mxCell id="${esc(id)}" value="${esc(value)}" style="${esc(cellStyle)}" vertex="1" parent="${esc(parent)}">${geometry(x, y, width, height)}</mxCell>`;
 }
 
-function edge({ id, value = "", parent = "1", source, target, style: cellStyle }) {
-  return `<mxCell id="${esc(id)}" value="${esc(value)}" style="${esc(cellStyle)}" edge="1" parent="${esc(parent)}" source="${esc(source)}" target="${esc(target)}">${geometry(0, 0, 0, 0, true)}</mxCell>`;
+function edgeGeometry(points = []) {
+  const array = points.length
+    ? `<Array as="points">${points.map(point => `<mxPoint x="${point.x}" y="${point.y}"/>`).join("")}</Array>`
+    : "";
+  return `<mxGeometry relative="1" as="geometry">${array}</mxGeometry>`;
+}
+
+function edge({ id, value = "", parent = "1", source, target, style: cellStyle, points = [] }) {
+  return `<mxCell id="${esc(id)}" value="${esc(value)}" style="${esc(cellStyle)}" edge="1" parent="${esc(parent)}" source="${esc(source)}" target="${esc(target)}">${edgeGeometry(points)}</mxCell>`;
 }
 
 function port({ id, parent, x, y, color = "#173B67" }) {

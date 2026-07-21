@@ -27,12 +27,30 @@
     },
     "node": {
       "allOf": [{"$ref": "#/$defs/box"}],
-      "properties": {"kind": {"enum": ["module", "shared-module", "input", "image", "tensor", "graph", "heatmap", "descriptor", "loss", "note", "merge", "output"]}, "imageData": {"type": "string"}, "ports": {"type": "array"}}
+      "properties": {
+        "kind": {"enum": ["module", "shared-module", "input", "sequence", "image", "tensor", "graph", "heatmap", "descriptor", "aggregator", "icon", "loss", "note", "merge", "output"]},
+        "imageData": {"type": "string"},
+        "imagePath": {"type": "string"},
+        "motif": {"enum": ["planes", "camera", "lidar"]},
+        "items": {"type": "object"},
+        "colors": {"type": "array", "items": {"type": "string"}},
+        "ports": {"type": "array"}
+      }
     },
     "edge": {
       "type": "object",
       "required": ["id", "source", "target"],
-      "properties": {"id": {"type": "string"}, "source": {"type": "string"}, "target": {"type": "string"}, "sourcePort": {"type": "string"}, "targetPort": {"type": "string"}, "label": {"type": "string"}, "dashed": {"type": "boolean"}, "trainingOnly": {"type": "boolean"}}
+      "properties": {
+        "id": {"type": "string"},
+        "source": {"type": "string"},
+        "target": {"type": "string"},
+        "sourcePort": {"type": "string"},
+        "targetPort": {"type": "string"},
+        "label": {"type": "string"},
+        "dashed": {"type": "boolean"},
+        "trainingOnly": {"type": "boolean"},
+        "points": {"type": "array", "items": {"type": "object", "required": ["x", "y"], "properties": {"x": {"type": "number"}, "y": {"type": "number"}}}}
+      }
     }
   }
 }

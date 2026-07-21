@@ -1,6 +1,6 @@
 {
   "name": "academic-framework-figure",
-  "version": "2.0.0",
+  "version": "2.1.0+codex.20260721081716",
   "description": "Design, generate, and validate editable publication-quality academic method figures in draw.io.",
   "author": {
     "name": "Brandon030722",
@@ -9,7 +9,12 @@
   "homepage": "https://github.com/Brandon030722/academic-framework-figure",
   "repository": "https://github.com/Brandon030722/academic-framework-figure",
   "license": "MIT",
-  "keywords": ["academic figures", "draw.io", "research diagrams", "computer vision"],
+  "keywords": [
+    "academic figures",
+    "draw.io",
+    "research diagrams",
+    "computer vision"
+  ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Academic Framework Figure",
@@ -17,7 +22,11 @@
     "longDescription": "Routes a paper method to one of three evidence-derived styles, generates a native draw.io diagram, and checks XML, embedded images, fonts, exports, and paper-scale readability.",
     "developerName": "Brandon030722",
     "category": "Productivity",
-    "capabilities": ["draw.io generation", "academic figure design", "PNG/PDF QA"],
+    "capabilities": [
+      "draw.io generation",
+      "academic figure design",
+      "PNG/PDF QA"
+    ],
     "websiteURL": "https://github.com/Brandon030722/academic-framework-figure",
     "defaultPrompt": [
       "Turn my method into an editable draw.io figure.",
